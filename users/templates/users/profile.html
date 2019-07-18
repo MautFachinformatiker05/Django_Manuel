@@ -1,0 +1,36 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+        {% if user.is_authenticated %}
+            {% if user.username == "admin" %}
+                    <p><img src="http://s.hswstatic.com/gif/how-clowns-work-orig.jpg" alt="" width="414" height="414" /></p>
+                    <hi1>Filip geh aus meinen Admin Account raus</hi1>
+            {% else %}
+                    <p><img src="https://bloximages.newyork1.vip.townnews.com/stltoday.com/content/tncms/assets/v3/editorial/a/80/a80ad816-fc3e-5c02-9f8f-0a6589c5bcaa/57f1b49db6fd0.image.jpg?resize=1200,795" alt="" width="414" height="414" /></p>
+                    <hi1>Du bist nur ein kleiner Wurm </hi1>
+            {% endif %}
+
+        {% else %}
+        <p><img src="http://www.slate.com/content/dam/slate/blogs/browbeat/2016/10/03/evil_clowns_have_been_sighted_all_over_america_since_1981/beepbeeprichie.jpg.CROP.promo-xlarge2.jpg" alt="" width="414" height="414" /></p>
+        <hi1>Du bist ein böser Junge </hi1>
+        {% endif %}
+
+
+
+        {% for post in posts %}
+        {%if user == post.author %}
+
+        <article class="media content-section">
+        <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="#">{{ post.author }}</a>
+          <small class="text-muted">{{ post.date_posted|date:"d F, Y" }}</small>
+        </div>
+        <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+        <p class="article-content">{{ post.content }}</p>
+        </div>
+        </article>
+        {% endif %}
+        {% endfor %}
+{% endblock content%}
